@@ -2,8 +2,7 @@
 
 #include <iostream>
 
-std::string const PresidentialPardonForm::_formName =
-    "Presidential Pardon Form";
+std::string const PresidentialPardonForm::_formName = "presidential pardon";
 
 PresidentialPardonForm::PresidentialPardonForm()
     : AForm(_formName, _requiredGradeToSign, _requiredGradeToExecute,

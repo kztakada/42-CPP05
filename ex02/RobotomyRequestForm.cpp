@@ -4,7 +4,7 @@
 #include <ctime>
 #include <iostream>
 
-std::string const RobotomyRequestForm::_formName = "Robotomy Request Form";
+std::string const RobotomyRequestForm::_formName = "robotomy request";
 
 RobotomyRequestForm::RobotomyRequestForm()
     : AForm(_formName, _requiredGradeToSign, _requiredGradeToExecute,

@@ -3,7 +3,7 @@
 #include <fstream>
 #include <iostream>
 
-std::string const ShrubberyCreationForm::_formName = "Shrubbery Creation Form";
+std::string const ShrubberyCreationForm::_formName = "shrubbery creation";
 
 ShrubberyCreationForm::ShrubberyCreationForm()
     : AForm(_formName, _requiredGradeToSign, _requiredGradeToExecute,

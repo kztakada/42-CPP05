@@ -17,21 +17,21 @@ int main() {
     // Test default constructor
     {
         PresidentialPardonForm form;
-        assert(form.getName() == "Presidential Pardon Form");
+        assert(form.getName() == "presidential pardon");
         assert(form.getIsSigned() == false);
         assert(form.getGradeToSign() == 25);
         assert(form.getGradeToExecute() == 5);
         assert(form.getTarget() == "default target");
 
         RobotomyRequestForm rform;
-        assert(rform.getName() == "Robotomy Request Form");
+        assert(rform.getName() == "robotomy request");
         assert(rform.getIsSigned() == false);
         assert(rform.getGradeToSign() == 72);
         assert(rform.getGradeToExecute() == 45);
         assert(rform.getTarget() == "default target");
 
         ShrubberyCreationForm sform;
-        assert(sform.getName() == "Shrubbery Creation Form");
+        assert(sform.getName() == "shrubbery creation");
         assert(sform.getIsSigned() == false);
         assert(sform.getGradeToSign() == 145);
         assert(sform.getGradeToExecute() == 137);
@@ -42,21 +42,21 @@ int main() {
     // Test parameterized constructor
     {
         RobotomyRequestForm form("TargetA");
-        assert(form.getName() == "Robotomy Request Form");
+        assert(form.getName() == "robotomy request");
         assert(form.getIsSigned() == false);
         assert(form.getGradeToSign() == 72);
         assert(form.getGradeToExecute() == 45);
         assert(form.getTarget() == "TargetA");
 
         RobotomyRequestForm rform("TargetA");
-        assert(rform.getName() == "Robotomy Request Form");
+        assert(rform.getName() == "robotomy request");
         assert(rform.getIsSigned() == false);
         assert(rform.getGradeToSign() == 72);
         assert(rform.getGradeToExecute() == 45);
         assert(rform.getTarget() == "TargetA");
 
         ShrubberyCreationForm sform("TargetA");
-        assert(sform.getName() == "Shrubbery Creation Form");
+        assert(sform.getName() == "shrubbery creation");
         assert(sform.getIsSigned() == false);
         assert(sform.getGradeToSign() == 145);
         assert(sform.getGradeToExecute() == 137);

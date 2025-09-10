@@ -1,11 +1,11 @@
 #include "AForm.hpp"
 
 AForm::AForm()
-    : _name("Default"),
+    : _name("default form"),
       _isSigned(false),
       _gradeToSign(LOWEST_GRADE),
       _gradeToExecute(LOWEST_GRADE),
-      _target("Default") {}
+      _target("") {}
 
 AForm::AForm(std::string const &name, int gradeToSign, int gradeToExecute,
     std::string const &target)
@@ -61,7 +61,6 @@ void AForm::execute(Bureaucrat const &executor) const {
     if (executor.getGrade() > _gradeToExecute) {
         throw AForm::GradeTooLowException();
     }
-    // Actual execution logic would go here in derived classes
 }
 
 // GradeTooHighException
