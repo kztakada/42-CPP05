@@ -13,7 +13,8 @@ const char *TOO_LOW_MSG = "Grade is too low";
 const char *NOT_SIGNED_MSG = "Form is not signed";
 
 // Test cases for Form cases
-int main() {
+int main()
+{
     // Test default constructor
     {
         PresidentialPardonForm form;
@@ -135,16 +136,19 @@ int main() {
         Bureaucrat executor("Executor", 1);
         std::cout << "01---------------------------------" << std::endl;
         PresidentialPardonForm pform("TargetD");
+        assert(pform.getIsSigned() == false);
         signer.signForm(pform);
         assert(pform.getIsSigned() == true);
         executor.executeForm(pform);
         std::cout << "02---------------------------------" << std::endl;
         RobotomyRequestForm rform("TargetD");
+        assert(rform.getIsSigned() == false);
         signer.signForm(rform);
         assert(rform.getIsSigned() == true);
         executor.executeForm(rform);
         std::cout << "03---------------------------------" << std::endl;
         ShrubberyCreationForm sform("TargetD");
+        assert(sform.getIsSigned() == false);
         signer.signForm(sform);
         assert(sform.getIsSigned() == true);
         executor.executeForm(sform);
@@ -153,103 +157,145 @@ int main() {
     }
     // Test exceptions for signing
     {
-        Bureaucrat lowRanker("LowRanker", 150);
+        Bureaucrat lowRanker("LowRanker", 26);
         PresidentialPardonForm pform("TargetE");
-        try {
+        try
+        {
             pform.beSigned(lowRanker);
-            assert(false);  // Should not reach here
-        } catch (std::exception &e) {
+            assert(false); // Should not reach here
+        }
+        catch (std::exception &e)
+        {
             assert(std::string(e.what()) == TOO_LOW_MSG);
         }
     }
     {
-        Bureaucrat lowRanker("LowRanker", 150);
-        RobotomyRequestForm beSigned("TargetE");
-        try {
-            beSigned.beSigned(lowRanker);
-            assert(false);  // Should not reach here
-        } catch (std::exception &e) {
+        Bureaucrat lowRanker("LowRanker", 73);
+        RobotomyRequestForm rform("TargetE");
+        try
+        {
+            rform.beSigned(lowRanker);
+            assert(false); // Should not reach here
+        }
+        catch (std::exception &e)
+        {
             assert(std::string(e.what()) == TOO_LOW_MSG);
         }
     }
     {
-        Bureaucrat lowRanker("LowRanker", 150);
+        Bureaucrat lowRanker("LowRanker", 146);
         ShrubberyCreationForm sform("TargetE");
-        try {
+        try
+        {
             sform.beSigned(lowRanker);
-            assert(false);  // Should not reach here
-        } catch (std::exception &e) {
+            assert(false); // Should not reach here
+        }
+        catch (std::exception &e)
+        {
             assert(std::string(e.what()) == TOO_LOW_MSG);
         }
     }
     {
         std::cout << "01---------------------------------" << std::endl;
-        Bureaucrat lowRanker("LowRanker", 150);
+        Bureaucrat lowRanker("LowRanker", 26);
         PresidentialPardonForm pform("TargetE");
         lowRanker.signForm(pform);
+        Bureaucrat justRanker("JustRanker", 25);
+        PresidentialPardonForm pform2("TargetE2");
+        justRanker.signForm(pform2);
     }
     {
         std::cout << "02---------------------------------" << std::endl;
-        Bureaucrat lowRanker("LowRanker", 150);
+        Bureaucrat lowRanker("LowRanker", 73);
         RobotomyRequestForm rform("TargetE");
         lowRanker.signForm(rform);
+        Bureaucrat justRanker("JustRanker", 72);
+        RobotomyRequestForm rform2("TargetE2");
+        justRanker.signForm(rform2);
     }
     {
         std::cout << "03---------------------------------" << std::endl;
-        Bureaucrat lowRanker("LowRanker", 150);
+        Bureaucrat lowRanker("LowRanker", 146);
         ShrubberyCreationForm sform("TargetE");
         lowRanker.signForm(sform);
+        Bureaucrat justRanker("JustRanker", 145);
+        ShrubberyCreationForm sform2("TargetE2");
+        justRanker.signForm(sform2);
         std::cout << "---------------------------------" << std::endl;
     }
     std::cout << "Signing exceptions test passed." << std::endl;
     // Test exceptions for executing
     {
-        Bureaucrat executor("Executor", 150);
+        Bureaucrat executor("Executor", 6);
         PresidentialPardonForm pform("TargetF");
-        try {
+        try
+        {
             pform.execute(executor);
-            assert(false);  // Should not reach here
-        } catch (std::exception &e) {
+            assert(false); // Should not reach here
+        }
+        catch (std::exception &e)
+        {
             assert(std::string(e.what()) == NOT_SIGNED_MSG);
         }
     }
     {
-        Bureaucrat executor("Executor", 150);
+        Bureaucrat executor("Executor", 46);
         RobotomyRequestForm rform("TargetF");
-        try {
+        try
+        {
             rform.execute(executor);
-            assert(false);  // Should not reach here
-        } catch (std::exception &e) {
+            assert(false); // Should not reach here
+        }
+        catch (std::exception &e)
+        {
             assert(std::string(e.what()) == NOT_SIGNED_MSG);
         }
     }
     {
-        Bureaucrat executor("Executor", 150);
+        Bureaucrat executor("Executor", 138);
         ShrubberyCreationForm sform("TargetF");
-        try {
+        try
+        {
             sform.execute(executor);
-            assert(false);  // Should not reach here
-        } catch (std::exception &e) {
+            assert(false); // Should not reach here
+        }
+        catch (std::exception &e)
+        {
             assert(std::string(e.what()) == NOT_SIGNED_MSG);
         }
     }
     {
         std::cout << "01---------------------------------" << std::endl;
-        Bureaucrat executor("Executor", 150);
+        Bureaucrat executor("Executor", 6);
         PresidentialPardonForm pform("TargetF");
+        executor.signForm(pform);
         executor.executeForm(pform);
+        Bureaucrat justExecutor("JustExecutor", 5);
+        PresidentialPardonForm pform2("TargetF");
+        justExecutor.signForm(pform2);
+        justExecutor.executeForm(pform2);
     }
     {
         std::cout << "02---------------------------------" << std::endl;
-        Bureaucrat executor("Executor", 150);
+        Bureaucrat executor("Executor", 46);
         RobotomyRequestForm rform("TargetF");
+        executor.signForm(rform);
         executor.executeForm(rform);
+        Bureaucrat justExecutor("JustExecutor", 45);
+        RobotomyRequestForm rform2("TargetF");
+        justExecutor.signForm(rform2);
+        justExecutor.executeForm(rform2);
     }
     {
         std::cout << "03---------------------------------" << std::endl;
-        Bureaucrat executor("Executor", 150);
+        Bureaucrat executor("Executor", 138);
         ShrubberyCreationForm sform("TargetF");
+        executor.signForm(sform);
         executor.executeForm(sform);
+        Bureaucrat justExecutor("JustExecutor", 137);
+        ShrubberyCreationForm sform2("TargetF");
+        justExecutor.signForm(sform2);
+        justExecutor.executeForm(sform2);
         std::cout << "---------------------------------" << std::endl;
     }
     std::cout << "Executing exceptions test passed." << std::endl;

@@ -9,7 +9,8 @@
 #include "RobotomyRequestForm.hpp"
 #include "ShrubberyCreationForm.hpp"
 
-int main() {
+int main()
+{
     std::cout << "01---------------------------------" << std::endl;
     // Test default constructor
     {
@@ -23,10 +24,22 @@ int main() {
         scf = someRandomIntern.makeForm("shrubbery creation", "Home");
         ppf = someRandomIntern.makeForm("presidential pardon", "Alice");
         unknown = someRandomIntern.makeForm("unknown", "Target");
-        (void)rrf;      // To avoid unused variable warning
-        (void)scf;      // To avoid unused variable warning
-        (void)ppf;      // To avoid unused variable warning
-        (void)unknown;  // To avoid unused variable warning
+        assert(rrf->getName() == "robotomy request");
+        assert(rrf->getIsSigned() == false);
+        assert(rrf->getGradeToSign() == 72);
+        assert(rrf->getGradeToExecute() == 45);
+        assert(rrf->getTarget() == "Bender");
+        assert(scf->getName() == "shrubbery creation");
+        assert(scf->getIsSigned() == false);
+        assert(scf->getGradeToSign() == 145);
+        assert(scf->getGradeToExecute() == 137);
+        assert(scf->getTarget() == "Home");
+        assert(ppf->getName() == "presidential pardon");
+        assert(ppf->getIsSigned() == false);
+        assert(ppf->getGradeToSign() == 25);
+        assert(ppf->getGradeToExecute() == 5);
+        assert(ppf->getTarget() == "Alice");
+        assert(unknown == NULL);
         delete rrf;
         delete scf;
         delete ppf;
@@ -37,11 +50,9 @@ int main() {
     {
         const FormMapping formMappings[] = {
             {ShrubberyCreationForm::getFormName(),
-                &ShrubberyCreationForm::create},
+             &ShrubberyCreationForm::create},
             {RobotomyRequestForm::getFormName(), &RobotomyRequestForm::create}};
-        // Test default constructor
-        Intern someRandomIntern;
-        // Intern someRandomIntern(formMappings);
+        Intern someRandomIntern(formMappings);
         AForm *rrf;
         AForm *scf;
         AForm *ppf = NULL;
@@ -51,10 +62,18 @@ int main() {
         scf = someRandomIntern.makeForm("shrubbery creation", "Home");
         ppf = someRandomIntern.makeForm("presidential pardon", "Alice");
         unknown = someRandomIntern.makeForm("unknown", "Target");
-        (void)rrf;      // To avoid unused variable warning
-        (void)scf;      // To avoid unused variable warning
-        (void)ppf;      // To avoid unused variable warning
-        (void)unknown;  // To avoid unused variable warning
+        assert(rrf->getName() == "robotomy request");
+        assert(rrf->getIsSigned() == false);
+        assert(rrf->getGradeToSign() == 72);
+        assert(rrf->getGradeToExecute() == 45);
+        assert(rrf->getTarget() == "Bender");
+        assert(scf->getName() == "shrubbery creation");
+        assert(scf->getIsSigned() == false);
+        assert(scf->getGradeToSign() == 145);
+        assert(scf->getGradeToExecute() == 137);
+        assert(scf->getTarget() == "Home");
+        assert(ppf == NULL);
+        assert(unknown == NULL);
         delete rrf;
         delete scf;
         delete ppf;
@@ -79,7 +98,7 @@ int main() {
     {
         const FormMapping formMappings[] = {
             {ShrubberyCreationForm::getFormName(),
-                &ShrubberyCreationForm::create},
+             &ShrubberyCreationForm::create},
             {RobotomyRequestForm::getFormName(), &RobotomyRequestForm::create}};
         Intern intern1(formMappings);
         Intern intern2(intern1);
@@ -114,7 +133,7 @@ int main() {
     {
         const FormMapping formMappings[] = {
             {ShrubberyCreationForm::getFormName(),
-                &ShrubberyCreationForm::create},
+             &ShrubberyCreationForm::create},
             {RobotomyRequestForm::getFormName(), &RobotomyRequestForm::create}};
         Intern intern1(formMappings);
         Intern intern2;
@@ -130,5 +149,7 @@ int main() {
         delete form2;
         std::cout << "Assignment operator test passed." << std::endl;
     }
+    std::cout << "---------------------------------" << std::endl;
+    std::cout << "All tests passed!" << std::endl;
     return 0;
 }
